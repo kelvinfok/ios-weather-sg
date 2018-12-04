@@ -21,9 +21,10 @@ class Listing: Codable {
     
     // Kelvin to celsius 0:-273.15
     
-    let dt: Int
+    let dt: Double
     let weather: [WeatherDetail]
     let main: Main
+    let dtTxt: String
     
     class WeatherDetail: Codable {
         let id: Int
@@ -36,6 +37,10 @@ class Listing: Codable {
         let temp: Double
         let tempMin: Double
         let tempMax: Double
+        
+        func getDCTemperature() -> String {
+            return String(format: "%.0f", temp - 273.15)
+        }
     }
     
 }

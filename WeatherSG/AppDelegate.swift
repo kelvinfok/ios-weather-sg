@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let frame = UIScreen.main.bounds
         self.window = UIWindow(frame: frame)
-        let controller = MainTableViewController()
+        let controller = MainViewController()
 
         if let window = self.window {
             window.rootViewController = UINavigationController(rootViewController: controller)
