@@ -26,6 +26,13 @@ class Listing: Codable {
     let main: Main
     let dtTxt: String
     
+    var date: Date! {        
+        let _date = Date(timeIntervalSince1970: dt)
+        let timezone = TimeZone.current
+        let seconds = TimeInterval(timezone.secondsFromGMT(for: _date))
+        return Date(timeInterval: seconds, since: _date)
+    }
+    
     class WeatherDetail: Codable {
         let id: Int
         let main: String
@@ -56,3 +63,4 @@ class Coordinate: Codable {
     let lat: Double
     let lon: Double
 }
+

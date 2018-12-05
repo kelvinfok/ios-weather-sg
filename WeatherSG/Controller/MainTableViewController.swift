@@ -26,9 +26,15 @@ class MainViewController: UIViewController {
     private let numberOfListingsPerDay = 8
     private let numberOfDaysPerQuery = 5
     
-    var forecast: Forecast? {
+    var listings: [[Listing]]? {
         didSet {
             tableView.reloadData()
+        }
+    }
+    
+    var forecast: Forecast? {
+        didSet {
+            listings = sort(listings: forecast!.list)
             setupNavigation()
         }
     }
@@ -62,21 +68,50 @@ class MainViewController: UIViewController {
             }
         })
     }
+    
+    func getLocalDate(listing: Listing) -> Date {
+        let dt = listing.dt
+        return Date(timeIntervalSince1970: dt).toLocalTime()
+    }
+    
+    func sort(listings: [Listing]) -> [[Listing]] {
+        
+        var masterListings = [[Listing]]()
+        var tempListings = [Listing]()
+        
+        for listing in listings {
+            let dateString = listing.dt.getDateStringFromUnixTime(dateStyle: .long, timeStyle: .none).components(separatedBy: ",").first!
+            if tempListings.isEmpty {
+                tempListings.append(listing)
+            } else {
+                if let lastItem = tempListings.last, let lastDateString = lastItem.dt.getDateStringFromUnixTime(dateStyle: .long, timeStyle: .none).components(separatedBy: ",").first {
+                    if dateString.elementsEqual(lastDateString) {
+                        tempListings.append(listing)
+                    } else {
+                        masterListings.append(tempListings)
+                        tempListings.removeAll()
+                        tempListings.append(listing)
+                    }
+                } else {
+                    tempListings.append(listing)
+                }
+            }
+        }
+        
+        return masterListings
+        
+    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = self.forecast?.list.count {
-            return count / numberOfListingsPerDay
-        }
-        return 0
+        return listings?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MainTableViewCell
-        let chunks = self.forecast?.list.chunked(into: numberOfListingsPerDay)
-        cell.listings = chunks?[indexPath.item]
+        cell.listings = self.listings?[indexPath.item]
         return cell
     }
     

@@ -10,15 +10,16 @@ import UIKit
 
 extension Date {
     
-    func isSameDay(date: Date) -> Bool {
-        let diff = Calendar.current.dateComponents([.day], from: self, to: date)
-        if diff.day == 0 {
-            print("same day")
-            return true
-        } else {
-            print("different day")
-            return false
-        }
+    func asString(style: DateFormatter.Style) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: self)
+    }
+    
+    enum Format: String {
+        case day = "EEEE"
+        case dateTime = "MMM d, h:mm a"
     }
     
     func toLocalTime() -> Date {
@@ -29,7 +30,23 @@ extension Date {
     
     func getDay() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
+    
+    func toString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        
+        let dt = dateFormatter.date(from: "dfs")
+        
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "h:mm a"
+        
+        return dateFormatter.string(from: dt!)
+
+    }
+    
 }

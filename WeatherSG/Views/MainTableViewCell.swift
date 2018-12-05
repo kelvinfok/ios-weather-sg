@@ -10,15 +10,9 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
     
-    var shortenListings: [Listing]? {
-        didSet {
-            updateViews()
-        }
-    }
-    
     var listings: [Listing]? {
         didSet {
-            shortenListings = listings!.enumerated().compactMap { $0 % 2 == 0 ? $1 : nil }
+            collectionView.reloadData()
         }
     }
     
@@ -66,12 +60,12 @@ class MainTableViewCell: UITableViewCell {
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shortenListings?.count ?? 0
+        return listings?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ListDetailCollectionViewCell
-        cell.listing = shortenListings?[indexPath.item]
+        cell.listing = listings?[indexPath.item]
         return cell
     }
     

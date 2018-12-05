@@ -25,7 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.makeKeyAndVisible()
         }
         
+        setupGlobalViews()
+        
         return true
+    }
+    
+    func setupGlobalViews() {
+        
+        UINavigationBar.appearance().barTintColor = ThemeManager.themeBackground
+        UINavigationBar.appearance().tintColor = ThemeManager.themeBlack
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.themeBlack, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .medium)]
+        
+        
+        
+        
+        UINavigationBar.appearance().isTranslucent = false
+
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
