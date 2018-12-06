@@ -13,5 +13,7 @@ struct ThemeManager {
     
     static let themeBackground = UIColor(hexFromString: "fdf6e6")
     static let themeBlack = UIColor(hexFromString: "2f3032")
+    static let themeGray = UIColor(hexFromString: "585858")
     
-}
+    static let themeFontBold = "Futura-Bold"
+    static let themeFontMedium = "Futura-Medium"}

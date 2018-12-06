@@ -33,11 +33,23 @@ class Listing: Codable {
         return Date(timeInterval: seconds, since: _date)
     }
     
+    var dateString: String! {
+        return Date.toString(format: .time, dt: dt)
+    }
+    
+    func toDateString(format: Date.Format) -> String {
+        return Date.toString(format: format, dt: dt)
+    }
+    
     class WeatherDetail: Codable {
         let id: Int
         let main: String
         let description: String
         let icon: String
+        
+        var iconImage: String {
+            return "http://openweathermap.org/img/w/".appending(icon).appending(".png")
+        }
     }
     
     class Main: Codable {

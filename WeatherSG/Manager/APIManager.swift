@@ -9,10 +9,20 @@
 import Foundation
 
 struct APIManager {
-    
-    static func fetch(url: URL, completion: @escaping (Forecast?, Error?) -> Void) {
+        
+    static func fetch(urlString: String, apiKey: String, cityId: String, completion: @escaping (Forecast?, Error?) -> Void) {
+        
+        let params: [String : String] = ["id": cityId, "appid": apiKey, "units" : "metric"]
+        
+        let queryString = buildQueryString(fromDictionary: params)
+        
+        let combined = urlString + queryString
+        print("combined: \(combined)")
+        
+        let url = URL(string: urlString.appending(queryString))!
         
         let request = URLRequest(url: url)
+
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -41,5 +51,18 @@ struct APIManager {
         }
         
         task.resume()
+    }
+    
+    static func buildQueryString(fromDictionary parameters: [String: String]) -> String {
+        
+        var urlVars: [String] = []
+        
+        for (k, value) in parameters {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                urlVars.append(k + "=" + encodedValue)
+            }
+        }
+        
+        return urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
     }
 }

@@ -10,16 +10,18 @@ import UIKit
 
 extension Date {
     
+    enum Format: String {
+        case time = "h:mm a"
+        case day = "EEEE"
+        case dateTime = "MMM d, h:mm a"
+        case fullDate = "EEEE, MMM d, yyyy"
+    }
+    
     func asString(style: DateFormatter.Style) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: self)
-    }
-    
-    enum Format: String {
-        case day = "EEEE"
-        case dateTime = "MMM d, h:mm a"
     }
     
     func toLocalTime() -> Date {
@@ -28,25 +30,17 @@ extension Date {
         return Date(timeInterval: seconds, since: self)
     }
     
-    func getDay() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: self)
-    }
-    
-    func toString() -> String {
+    static func toString(format: Format, dt: Double) -> String {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "H:mm:ss"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         
-        
-        let dt = dateFormatter.date(from: "dfs")
+        let dt = Date(timeIntervalSince1970: dt)
         
         dateFormatter.timeZone = TimeZone.current
-        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.dateFormat = format.rawValue
         
-        return dateFormatter.string(from: dt!)
-
+        return dateFormatter.string(from: dt)
     }
-    
 }

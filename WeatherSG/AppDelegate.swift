@@ -35,13 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = ThemeManager.themeBackground
         UINavigationBar.appearance().tintColor = ThemeManager.themeBlack
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.themeBlack, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .medium)]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.themeBlack, NSAttributedString.Key.font : UIFont(name: ThemeManager.themeFontBold, size: 24)!]
         
-        
-        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.themeBlack, NSAttributedString.Key.font : UIFont(name: ThemeManager.themeFontBold, size: 24)!]
         
         UINavigationBar.appearance().isTranslucent = false
-
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().shadowImage = UIImage()
 
