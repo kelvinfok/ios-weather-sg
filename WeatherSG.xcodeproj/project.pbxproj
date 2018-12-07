@@ -30,6 +30,7 @@
 		8D95C69B21B6B6180021CCCE /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D95C69A21B6B6180021CCCE /* ListingsCollectionViewCell.swift */; };
 		8D95C69E21B6D7280021CCCE /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D95C69D21B6D7280021CCCE /* Date.swift */; };
 		8D95C6A221B6DFD30021CCCE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D95C6A121B6DFD30021CCCE /* UIView.swift */; };
+		8DC9C29A21BACE88002ABFD8 /* privacy_policy.md in Resources */ = {isa = PBXBuildFile; fileRef = 8DC9C29921BACE88002ABFD8 /* privacy_policy.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		8D95C69A21B6B6180021CCCE /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		8D95C69D21B6D7280021CCCE /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8D95C6A121B6DFD30021CCCE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		8DC9C29921BACE88002ABFD8 /* privacy_policy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = privacy_policy.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,10 +77,12 @@
 			isa = PBXGroup;
 			children = (
 				8D192C4021B9787500FC1925 /* README.md */,
+				8DC9C29921BACE88002ABFD8 /* privacy_policy.md */,
 				8D192C4221B97C0000FC1925 /* animation_demo.gif */,
 				8D192C4421B97EF500FC1925 /* sketch_prototype.png */,
 				8D04110921B6738100442DF9 /* WeatherSG */,
 				8D04110821B6738100442DF9 /* Products */,
+				8DEDE70421BAC13D00DBE33A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +170,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		8DEDE70421BAC13D00DBE33A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,6 +209,11 @@
 				TargetAttributes = {
 					8D04110621B6738100442DF9 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -225,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D04111521B6738200442DF9 /* LaunchScreen.storyboard in Resources */,
+				8DC9C29A21BACE88002ABFD8 /* privacy_policy.md in Resources */,
 				8D192C4321B97C0000FC1925 /* animation_demo.gif in Resources */,
 				8D192C4521B97EF500FC1925 /* sketch_prototype.png in Resources */,
 				8D04111221B6738200442DF9 /* Assets.xcassets in Resources */,
@@ -410,7 +427,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kelvinfok.WeatherSG;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kelvinfok.ios-weatherSG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,7 +446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kelvinfok.WeatherSG;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kelvinfok.ios-weatherSG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
