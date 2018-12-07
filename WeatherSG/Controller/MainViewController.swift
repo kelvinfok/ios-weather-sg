@@ -92,6 +92,10 @@ class MainViewController: UIViewController {
         }
     }
     
+    func refreshForecast() {
+        self.fetchForecast()
+    }
+    
     private func fetchForecast() {
         
         let FORECAST_URL = EndpointManager.Endpoint.FORECAST.rawValue
@@ -158,6 +162,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ListingsCollectionViewCell
         cell.listings = self.listings[indexPath.item]
+        cell.delegate = self
         return cell
     }
 

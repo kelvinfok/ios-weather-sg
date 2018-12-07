@@ -10,6 +10,13 @@ import UIKit
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     
+    weak var delegate: MainViewController?
+    
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        return refreshControl
+    }()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: .grouped)
         tableView.delegate = self
@@ -22,11 +29,14 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         tableView.isPagingEnabled = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = ThemeManager.themeBackground
+        tableView.refreshControl = self.refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData), for: .valueChanged)
         return tableView
     }()
     
     var listings: [Listing]? {
         didSet {
+            refreshControl.endRefreshing()
             tableView.reloadData()
         }
     }
@@ -52,6 +62,12 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
+    }
+    
+    @objc func refreshWeatherData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.delegate?.refreshForecast()
+        }
     }
 }
 

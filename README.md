@@ -1,7 +1,5 @@
 # WeatherSG
 
-## WeatherSG App
-
 WeatherSG is an iOS application that gives you the 5 day weather forecast on Singapore's weather on a 3-hourly time-frame.
 
 ## Preview
