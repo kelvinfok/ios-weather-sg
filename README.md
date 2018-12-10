@@ -18,9 +18,18 @@ WeatherSG is an iOS application that gives you the 5 day weather forecast on Sin
 
 <img src="https://raw.githubusercontent.com/kelvinfok/ios-weather-sg/master/sketch_prototype.png"> 
 
-## How to run the project
+## Requirements
 
-Download the app from iOS App Store by searching for weatherSG
+XCode 10 or higher
+Swift 4.2 or higher
+
+## Installation
+
+1. Clone the repo
+
+2. Open `WeatherSG.xcodeproj`
+
+3. Run by pressing Play or hit [CMD + R]
 
 ## Pending improvements
 
